@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: headless-chrome
+  labels:
+    app: chrome
+spec:
+  selector:
+    matchLabels:
+      app: chrome
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: chrome
+    spec:
+      containers:
+      - name: headless-chrome
+        image: ccr.ccs.tencentyun.com/saycheese/headless-chrome:latest
+        securityContext:
+          capabilities:
+            add: ["SYS_ADMIN"]
+        ports:
+        - containerPort: 9222
+      imagePullSecrets:
+      - name: qcloudregistrykey
+      - name: tencenthubkey

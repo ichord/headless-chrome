@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: headless-chrome-svc
+  labels:
+    app: chrome
+spec:
+  selector:
+    app: chrome
+  ports:
+  - port: 9222
